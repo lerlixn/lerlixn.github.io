@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; URL=/" />
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+      var path = window.location.pathname
+        .replace(/^\//, '')
+        .replace(/\/$/, '');
+      var search = window.location.search;
+      var hash = window.location.hash;
+      var target = '/?p=' + encodeURIComponent(path) + search + hash;
+      window.location.replace(target);
+    </script>
   </head>
   <body>
     <p>Redirecting...</p>
