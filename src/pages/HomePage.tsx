@@ -6,13 +6,23 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="bg-gradient-to-br from-green-50 via-lime-50 to-purple-50 min-h-screen flex flex-col items-center p-6 text-gray-800 relative">
-      {/* Логотип в левом верхнем углу */}
-      <div className="absolute top-6 left-6 bg-white/50 rounded-full p-3 shadow-md">
-        <img
-          src={require("../assets/logo.png")}
-          alt="ReadTimer Logo"
-          className="h-20"
-        />
+      {/* Логотип и кнопка отзывов в верхней части */}
+      <div className="absolute top-6 left-6 flex items-center gap-4">
+        <div className="bg-white/50 rounded-full p-3 shadow-md">
+          <img
+            src={require("../assets/logo.png")}
+            alt="ReadTimer Logo"
+            className="h-20"
+          />
+        </div>
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLScWBtI562YEORBjR8kfVchUEaSqxeTCrZyVVwGZTWmNc_qv1w/viewform?usp=header"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:from-purple-300 hover:to-pink-300 transition-all duration-300 transform hover:scale-105"
+        >
+          Leave Feedback
+        </a>
       </div>
 
       {/* Верхняя секция с кнопками навигации */}
@@ -45,7 +55,7 @@ const HomePage: React.FC = () => {
           Your Ultimate Reading Companion
         </h3>
         <p className="text-gray-700 mb-8 text-center">
-          ReadTimer is designed to make your reading experience more organized and enjoyable. Whether you're diving into a novel, studying for school, or exploring new genres, ReadTimer helps you stay focused, track your progress, and keep your thoughts in one place. Here’s how it works:
+          ReadTimer is designed to make your reading experience more organized and enjoyable. Whether you're diving into a novel, studying for school, or exploring new genres, ReadTimer helps you stay focused, track your progress, and keep your thoughts in one place. Here's how it works:
         </p>
 
         {/* Список функций с иконками */}
@@ -74,7 +84,7 @@ const HomePage: React.FC = () => {
               Keep Your Notes
             </h4>
             <p className="text-gray-700">
-              Write notes after each session. They’ll be added to your existing notes, so you never lose your thoughts.
+              Write notes after each session. They'll be added to your existing notes, so you never lose your thoughts.
             </p>
           </div>
         </div>
@@ -85,7 +95,7 @@ const HomePage: React.FC = () => {
             Why Choose ReadTimer?
           </h4>
           <p className="text-gray-700 mb-4">
-            Reading can be more than just a hobby — it’s a way to grow, learn, and relax. ReadTimer helps you build a reading habit by making it easy to stay consistent. With features like progress tracking, note-taking, and a clean interface, you’ll always know where you left off and what you thought about each book.
+            Reading can be more than just a hobby — it's a way to grow, learn, and relax. ReadTimer helps you build a reading habit by making it easy to stay consistent. With features like progress tracking, note-taking, and a clean interface, you'll always know where you left off and what you thought about each book.
           </p>
           <p className="text-gray-700">
             Perfect for book lovers, students, or anyone who wants to read more. Start your reading journey today!
