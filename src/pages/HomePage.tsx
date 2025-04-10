@@ -14,7 +14,7 @@ const HomePage: React.FC = () => {
           <img
             src={logo} // ← и вот тут всё ок
             alt="ReadTimer Logo"
-            className="h-28 sm:h-32 transition-all duration-300 rounded-full"
+            className="h-28 sm:h-32 transition-all duration-300 rounded-full select-none pointer-events-none"
           />
         </div>
       </div>
