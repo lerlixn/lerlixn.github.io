@@ -105,6 +105,21 @@ const HomePage: React.FC = () => {
           </p>
         </div>
       </div>
+      <div className="mb-10">
+  <a
+    href="https://www.producthunt.com/posts/readtimer?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-readtimer"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <img
+      src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=951989&theme=dark&t=1744308300577"
+      alt="ReadTimer - Minimalist reading app for focused and calm reading | Product Hunt"
+      style={{ width: "250px", height: "54px" }}
+      width={250}
+      height={54}
+    />
+  </a>
+</div>
       {/* Футер с контактами */}
   <footer className="text-center text-sm text-gray-500 mt-auto py-6">
     <p>© 2025 Valeriia Lykhomanova</p>
