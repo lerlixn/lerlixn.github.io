@@ -9,11 +9,11 @@ const HomePage: React.FC = () => {
       
       {/* Центрированный логотип над навигацией */}
       <div className="flex justify-center mb-10 animate-fade-in">
-  <div className="bg-white/30 backdrop-blur-lg rounded-full p-5 shadow-lg border border-white/40">
+  <div className="bg-white/30 backdrop-blur-lg rounded-full p-5 shadow-lg border border-white/40 overflow-hidden">
     <img
       src={require("../assets/logo.png")}
       alt="ReadTimer Logo"
-      className="h-28 sm:h-32 transition-all duration-300"
+      className="h-28 sm:h-32 transition-all duration-300 rounded-full"
     />
   </div>
 </div>
