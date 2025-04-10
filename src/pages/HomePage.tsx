@@ -6,14 +6,18 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="bg-gradient-to-br from-green-50 via-lime-50 to-purple-50 min-h-screen flex flex-col items-center p-6 text-gray-800 relative">
-      {/* Логотип в левом верхнем углу */}
-      <div className="absolute top-6 left-6 bg-white/50 rounded-full p-3 shadow-md">
-        <img
-          src={require("../assets/logo.png")}
-          alt="ReadTimer Logo"
-          className="h-20"
-        />
-      </div>
+      
+      {/* Центрированный логотип над навигацией */}
+      <div className="flex justify-center mb-10 animate-fade-in">
+  <div className="bg-white/30 backdrop-blur-lg rounded-full p-5 shadow-lg border border-white/40">
+    <img
+      src={require("../assets/logo.png")}
+      alt="ReadTimer Logo"
+      className="h-28 sm:h-32 transition-all duration-300"
+    />
+  </div>
+</div>
+
 
       {/* Верхняя секция с кнопками навигации */}
       <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-10 w-full max-w-2xl mb-10 flex flex-col items-center">
@@ -100,7 +104,21 @@ const HomePage: React.FC = () => {
           </p>
         </div>
       </div>
-    </div>
+      {/* Футер с контактами */}
+  <footer className="text-center text-sm text-gray-500 mt-auto py-6">
+    <p>© 2025 Valeriia Lykhomanova</p>
+    <p>
+      Contact:{" "}
+      <a
+        href="mailto:leralikhomanova@gmail.com"
+        className="text-emerald-500 hover:underline"
+      >
+        leralikhomanova@gmail.com
+      </a>
+    </p>
+  </footer>
+</div>
+
   );
 };
 
