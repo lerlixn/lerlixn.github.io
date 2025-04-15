@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import ThemeToggle from "../components/ThemeToggle"; // Импорт ThemeToggle
 
 interface BookProgress {
   id: string;
@@ -132,7 +133,7 @@ const BooksPage: React.FC = () => {
         const fallbackData = await fallbackResponse.json();
         console.log("BooksPage - Google Books API response (intitle search):", fallbackData);
 
-        if (fallbackData.items && fallbackData.items.length > 0) {
+        if (fallbackData.items && data.items.length > 0) {
           suggestionList = fallbackData.items.map((item: any) => ({
             title: item.volumeInfo.title || "Unknown Title",
             author: item.volumeInfo.authors ? item.volumeInfo.authors.join(", ") : "Unknown Author",
@@ -174,24 +175,27 @@ const BooksPage: React.FC = () => {
   });
 
   return (
-    <div className="bg-gradient-to-br from-green-50 via-lime-50 to-purple-50 min-h-screen flex flex-col items-center justify-center p-6 text-gray-800">
-      <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-10 w-full max-w-xl">
+    <div className="bg-gradient-to-br from-green-50 via-lime-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-black min-h-screen flex flex-col items-center justify-center p-6 text-gray-800 dark:text-gray-100">
+      <div className="fixed left-4 top-1/2 transform -translate-y-1/2 z-[100]">
+        <ThemeToggle />
+      </div>
+      <div className="bg-white/90 dark:bg-gray-800 backdrop-blur-sm rounded-2xl shadow-lg p-10 w-full max-w-xl">
         <button
           onClick={() => navigate("/")}
-          className="mb-6 bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-5 py-2 rounded-full text-sm font-medium shadow-md hover:from-purple-400 hover:to-indigo-400 transition-all duration-300 transform hover:scale-105"
+          className="mb-6 bg-gradient-to-r from-purple-500 to-indigo-500 dark:from-purple-700 dark:to-indigo-800 text-white px-5 py-2 rounded-full text-sm font-medium shadow-md hover:from-purple-400 hover:to-indigo-400 dark:hover:from-purple-600 dark:hover:to-indigo-700 transition-all duration-300 transform hover:scale-105"
         >
           Back to Home
         </button>
 
-        <h1 className="text-3xl font-bold mb-6 text-center text-gray-900">Your Books</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">Your Books</h1>
 
         <div className="flex justify-center gap-3 mb-6">
           <button
             onClick={() => setFilter("all")}
             className={`px-4 py-2 rounded-lg font-medium shadow-md transition-all duration-300 transform hover:scale-105 ${
               filter === "all"
-                ? "bg-gradient-to-r from-blue-400 to-indigo-400 text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                ? "bg-gradient-to-r from-blue-400 to-indigo-400 dark:from-blue-600 dark:to-indigo-600 text-white"
+                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
             }`}
           >
             All
@@ -200,8 +204,8 @@ const BooksPage: React.FC = () => {
             onClick={() => setFilter("reading")}
             className={`px-4 py-2 rounded-lg font-medium shadow-md transition-all duration-300 transform hover:scale-105 ${
               filter === "reading"
-                ? "bg-gradient-to-r from-green-400 to-emerald-400 text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                ? "bg-gradient-to-r from-green-400 to-emerald-400 dark:from-green-600 dark:to-emerald-600 text-white"
+                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
             }`}
           >
             Reading
@@ -210,15 +214,15 @@ const BooksPage: React.FC = () => {
             onClick={() => setFilter("finished")}
             className={`px-4 py-2 rounded-lg font-medium shadow-md transition-all duration-300 transform hover:scale-105 ${
               filter === "finished"
-                ? "bg-gradient-to-r from-purple-400 to-pink-400 text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                ? "bg-gradient-to-r from-purple-400 to-pink-400 dark:from-purple-600 dark:to-pink-600 text-white"
+                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
             }`}
           >
             Finished
           </button>
         </div>
 
-        <div className="bg-gray-50 rounded-xl p-6 shadow-inner">
+        <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-6 shadow-inner">
           {filteredBooks.length > 0 ? (
             <ul className="space-y-4">
               {filteredBooks.map((book) => {
@@ -227,26 +231,26 @@ const BooksPage: React.FC = () => {
                   100
                 );
                 return (
-                  <li key={book.id} className="p-3 bg-gray-100 rounded-lg space-y-2">
+                  <li key={book.id} className="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg space-y-2">
                     <div className="flex-1">
                       {editingBookId === book.id && !isEditingNote ? (
                         <div>
-                          <label className="block mb-2 text-gray-700">Search for a book:</label>
+                          <label className="block mb-2 text-gray-700 dark:text-gray-300">Search for a book:</label>
                           <div className="relative mb-4">
                             <input
                               type="text"
                               value={editSearchQuery}
                               onChange={handleEditSearchChange}
-                              className="w-full bg-gray-100 px-2 py-1 rounded-lg"
+                              className="w-full bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded-lg text-gray-800 dark:text-gray-100"
                               placeholder="Start typing a book title..."
                             />
                             {editSuggestions.length > 0 && (
-                              <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded-lg mt-1 max-h-40 overflow-y-auto">
+                              <ul className="absolute z-10 w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg mt-1 max-h-40 overflow-y-auto">
                                 {editSuggestions.map((suggestion: GoogleBookSuggestion, index: number) => (
                                   <li
                                     key={index}
                                     onClick={() => handleEditSuggestionSelect(suggestion)}
-                                    className="px-2 py-1 hover:bg-gray-100 cursor-pointer"
+                                    className="px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-gray-800 dark:text-gray-100"
                                   >
                                     {suggestion.title} by {suggestion.author}
                                   </li>
@@ -254,21 +258,21 @@ const BooksPage: React.FC = () => {
                               </ul>
                             )}
                           </div>
-                          <label className="block mb-2 text-gray-700">Title:</label>
+                          <label className="block mb-2 text-gray-700 dark:text-gray-300">Title:</label>
                           <input
                             type="text"
                             value={editTitle}
                             onChange={(e) => setEditTitle(e.target.value)}
-                            className="w-full bg-gray-100 px-2 py-1 rounded-lg mb-4"
+                            className="w-full bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded-lg mb-4 text-gray-800 dark:text-gray-100"
                           />
-                          <label className="block mb-2 text-gray-700">Author:</label>
+                          <label className="block mb-2 text-gray-700 dark:text-gray-300">Author:</label>
                           <input
                             type="text"
                             value={editAuthor}
                             onChange={(e) => setEditAuthor(e.target.value)}
-                            className="w-full bg-gray-100 px-2 py-1 rounded-lg mb-4"
+                            className="w-full bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded-lg mb-4 text-gray-800 dark:text-gray-100"
                           />
-                          <label className="block mb-2 text-gray-700">Current Page:</label>
+                          <label className="block mb-2 text-gray-700 dark:text-gray-300">Current Page:</label>
                           <input
                             type="text"
                             value={editCurrentPage}
@@ -278,91 +282,91 @@ const BooksPage: React.FC = () => {
                                 setEditCurrentPage(value);
                               }
                             }}
-                            className="w-full bg-gray-100 px-2 py-1 rounded-lg mb-4"
+                            className="w-full bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded-lg mb-4 text-gray-800 dark:text-gray-100"
                             placeholder="Enter current page"
                           />
-                          <label className="block mb-2 text-gray-700">Total Pages:</label>
+                          <label className="block mb-2 text-gray-700 dark:text-gray-300">Total Pages:</label>
                           <input
                             type="number"
                             value={editTotalPages}
                             onChange={(e) => setEditTotalPages(Number(e.target.value))}
-                            className="w-full bg-gray-100 px-2 py-1 rounded-lg mb-4"
+                            className="w-full bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded-lg mb-4 text-gray-800 dark:text-gray-100"
                             min="1"
                           />
-                          <label className="block mb-2 text-gray-700">Status:</label>
+                          <label className="block mb-2 text-gray-700 dark:text-gray-300">Status:</label>
                           <select
                             value={editStatus}
                             onChange={(e) =>
                               setEditStatus(e.target.value as "reading" | "finished")
                             }
-                            className="w-full bg-gray-100 px-2 py-1 rounded-lg mb-4"
+                            className="w-full bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded-lg mb-4 text-gray-800 dark:text-gray-100"
                           >
                             <option value="reading">Reading</option>
                             <option value="finished">Finished</option>
                           </select>
                           <button
                             onClick={() => handleSaveBook(book.id)}
-                            className="bg-gradient-to-r from-green-400 to-emerald-400 text-white px-4 py-2 rounded-lg font-medium shadow-md hover:from-green-300 hover:to-emerald-300 transition-all duration-300 transform hover:scale-105"
+                            className="bg-gradient-to-r from-green-400 to-emerald-400 dark:from-green-600 dark:to-emerald-600 text-white px-4 py-2 rounded-lg font-medium shadow-md hover:from-green-300 hover:to-emerald-300 dark:hover:from-green-500 dark:hover:to-emerald-500 transition-all duration-300 transform hover:scale-105"
                           >
                             Save Book
                           </button>
                         </div>
                       ) : (
                         <>
-                          <p className="text-gray-800 font-medium">{book.title}</p>
-                          <p className="text-gray-600 text-sm">by {book.author}</p>
-                          <p className="text-gray-600 text-sm">
+                          <p className="text-gray-800 dark:text-gray-100 font-medium">{book.title}</p>
+                          <p className="text-gray-600 dark:text-gray-300 text-sm">by {book.author}</p>
+                          <p className="text-gray-600 dark:text-gray-300 text-sm">
                             Progress: {book.currentPage} / {book.totalPages} ({progress}%)
                           </p>
-                          <div className="w-full bg-gray-200 h-2 rounded-full">
+                          <div className="w-full bg-gray-200 dark:bg-gray-600 h-2 rounded-full">
                             <div
-                              className="h-full bg-emerald-400 rounded-full"
+                              className="h-full bg-emerald-400 dark:bg-emerald-600 rounded-full"
                               style={{ width: `${progress}%` }}
                             />
                           </div>
-                          <p className="text-gray-600 text-sm">Status: {book.status}</p>
+                          <p className="text-gray-600 dark:text-gray-300 text-sm">Status: {book.status}</p>
                           {editingBookId === book.id && isEditingNote ? (
                             <div>
                               <textarea
                                 value={editNote}
                                 onChange={(e) => setEditNote(e.target.value)}
-                                className="w-full bg-gray-100 px-2 py-1 rounded-lg mb-2"
+                                className="w-full bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded-lg mb-2 text-gray-800 dark:text-gray-100"
                                 placeholder="Edit your note"
                               />
                               <button
                                 onClick={() => handleSaveNote(book.id)}
-                                className="bg-gradient-to-r from-green-400 to-emerald-400 text-white px-4 py-2 rounded-lg font-medium shadow-md hover:from-green-300 hover:to-emerald-300 transition-all duration-300 transform hover:scale-105"
+                                className="bg-gradient-to-r from-green-400 to-emeqrald-400 dark:from-green-600 dark:to-emerald-600 text-white px-4 py-2 rounded-lg font-medium shadow-md hover:from-green-300 hover:to-emerald-300 dark:hover:from-green-500 dark:hover:to-emerald-500 transition-all duration-300 transform hover:scale-105"
                               >
                                 Save Note
                               </button>
                             </div>
                           ) : (
                             <div>
-                              <p className="text-gray-500 text-sm">
+                              <p className="text-gray-500 dark:text-gray-400 text-sm">
                                 Note: {book.note || "No notes"}
                               </p>
                               <div className="flex gap-2 mt-2 flex-wrap">
                                 <button
-                                  onClick={() => handleReadBook(book.title)} // Новая кнопка "Read"
-                                  className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:from-yellow-300 hover:to-orange-300 transition-all duration-300 transform hover:scale-105"
+                                  onClick={() => handleReadBook(book.title)}
+                                  className="bg-gradient-to-r from-yellow-400 to-orange-400 dark:from-yellow-600 dark:to-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:from-yellow-300 hover:to-orange-300 dark:hover:from-yellow-500 dark:hover:to-orange-500 transition-all duration-300 transform hover:scale-105"
                                 >
                                   Read
                                 </button>
                                 <button
                                   onClick={() => handleEditBook(book)}
-                                  className="bg-gradient-to-r from-blue-400 to-indigo-400 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:from-blue-300 hover:to-indigo-300 transition-all duration-300 transform hover:scale-105"
+                                  className="bg-gradient-to-r from-blue-400 to-indigo-400 dark:from-blue-600 dark:to-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:from-blue-300 hover:to-indigo-300 dark:hover:from-blue-500 dark:hover:to-indigo-500 transition-all duration-300 transform hover:scale-105"
                                 >
                                   Edit Book
                                 </button>
                                 <button
                                   onClick={() => handleEditNote(book)}
-                                  className="bg-gradient-to-r from-teal-400 to-cyan-400 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:from-teal-300 hover:to-cyan-300 transition-all duration-300 transform hover:scale-105"
+                                  className="bg-gradient-to-r from-teal-400 to-cyan-400 dark:from-teal-600 dark:to-cyan-600 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:from-teal-300 hover:to-cyan-300 dark:hover:from-teal-500 dark:hover:to-cyan-500 transition-all duration-300 transform hover:scale-105"
                                 >
                                   Edit Note
                                 </button>
                                 <button
                                   onClick={() => handleDelete(book.id)}
-                                  className="bg-gradient-to-r from-red-400 to-rose-400 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:from-red-300 hover:to-rose-300 transition-all duration-300 transform hover:scale-105"
+                                  className="bg-gradient-to-r from-red-400 to-rose-400 dark:from-red-600 dark:to-rose-600 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:from-red-300 hover:to-rose-300 dark:hover:from-red-500 dark:hover:to-rose-500 transition-all duration-300 transform hover:scale-105"
                                 >
                                   Delete
                                 </button>
@@ -377,7 +381,7 @@ const BooksPage: React.FC = () => {
               })}
             </ul>
           ) : (
-            <p className="text-gray-500 italic">
+            <p className="text-gray-500 dark:text-gray-400 italic">
               {filter === "all"
                 ? "No books yet. Add some on the timer page!"
                 : `No books with status "${filter}".`}
